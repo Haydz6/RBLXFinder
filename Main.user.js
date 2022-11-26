@@ -67,17 +67,17 @@ function ImageUrlsHasTargetUrl(TargetUrl, ImageUrls){
 }
 
 async function SearchForPlayer(PlaceId, UserId){
-    const TargetImageUrl = GetImageUrlFromUserId(UserId)
+    const TargetImageUrl = await GetImageUrlFromUserId(UserId)
     let LastCursor = ""
 
     while (true) {
-        const Servers = GetServers(PlaceId, LastCursor)
+        const Servers = await GetServers(PlaceId, LastCursor)
         LastCursor = Servers.nextPageCursor
 
         for (let i = 0; i < Servers.data.length; i++){
             const Server = Servers.data[i]
 
-            const ImageUrls = GetImageUrlsFromTokens(Server.playerTokens)
+            const ImageUrls = await GetImageUrlsFromTokens(Server.playerTokens)
 
             if (ImageUrlsHasTargetUrl(TargetImageUrl, ImageUrls)) {
                 return Server
@@ -90,7 +90,7 @@ async function SearchForPlayer(PlaceId, UserId){
     }
 }
 
-const ServerFound = SearchForPlayer(8416011646, 5187703)
+const ServerFound = await SearchForPlayer(8416011646, 5187703)
 
 if (ServerFound) {
     console.log(ServerFound.id)
