@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         RBLXFinder
-// @version      1.0
+// @version      1.1
 // @description  Finds a player in a roblox server
 // @author       Haydz6
 // @match        https://www.roblox.com/games/*
